@@ -8,16 +8,17 @@ Mars Rover is a coding challenge provided by Catalyser as part of their intervie
 
 ## Requirements ##
 
-You are required to engineer a solution to the problem below. The problem below requires input. You
-are free to implement any mechanism for feeding input into the solution. You should provide evidence
-that your solution is complete by, as a minimum, indicating that it works correctly against the supplied
-test data. It is highly recommended that you use a unit testing framework.
+You are required to engineer a solution to the problem below. 
+The problem below requires input. You are free to implement any mechanism for feeding input into the solution. 
+You should provide evidence that your solution is complete by, as a minimum, indicating that it works correctly against the supplied
+test data. It is highly recommended that you use a unit testing framework.  
 The code you write should be of production quality. There is no perfect solution, the purpose of this
 exercise is to see how you go about engineering a solution. Please don’t spend any more than a few
 hours on this problem. Feel free to use third party libraries if required.
 Solutions can be sent via .zip to your contact (the person you received this problem from), or uploaded
 to a Github, Gitlab, or Bitbucket account where we are given access.
-Mars Rover Problem
+
+Mars Rover Problem  
 A squad of robotic rovers are to be landed by NASA on a plateau on Mars. This plateau, which is
 curiously rectangular, must be navigated by the rovers so that their on-board cameras can get a
 complete view of the surrounding terrain to send back to Earth. A rover's position and location is
@@ -47,32 +48,32 @@ The output for each rover should be its final co-ordinates and heading.
 
 ### INPUT AND OUTPUT ###
 
-Test Input:
-5 5
-1 2 N
-LMLMLMLMM
-3 3 E
-MMRMMRMRRM
+Test Input:  
+5 5  
+1 2 N  
+LMLMLMLMM  
+3 3 E  
+MMRMMRMRRM  
 
-Expected Output:
-1 3 N
-5 1 E
+Expected Output:  
+1 3 N  
+5 1 E  
 
 ## Assumptions ##
 
-1 - All rovers are deployed before the first one starts executing its commands 
-2 - Each rover is deployed with their string of commands
+1 - All rovers are deployed before the first one starts executing its commands  
+2 - Each rover is deployed with their string of commands  
 
-What happens if:
-1 - multiple rovers are deployed at the same coordinates? 
-    - assuming rovers that come after will not be deployed
+What happens if:  
+1 - multiple rovers are deployed at the same coordinates?  
+    - assuming rovers that come after will not be deployed  
    
-2 - a rover collides with another rover ?
-    - both break, also blocking the others' movements ? 
-    - assuming not... it will rather not move if it detects another rover in the position it is moving to, and no more commands will be executed
+2 - a rover collides with another rover ?  
+    - both break, also blocking the others' movements ?  
+    - assuming not... it will rather not move if it detects another rover in the position it is moving to, and no more commands will be executed  
   
-3 - a rover tries to go outside the grid area?
-    - assuming the rover will not move past grid boundaries, but no more commands will be executed (to avoid a rogue rover following an unplanned trajectory)
+3 - a rover tries to go outside the grid area?  
+    - assuming the rover will not move past grid boundaries, but no more commands will be executed (to avoid a rogue rover following an unplanned trajectory)  
 
 
 ## Running the tool ##
