@@ -14,6 +14,12 @@ import lombok.NonNull;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Each instance represents a rover.
+ * They know how to execute their commands, and update their positions on the shared grid by themselves (rather than asking the manager to do it). 
+ * @author davi
+ *
+ */
 @Slf4j
 @Data
 @ToString(exclude="positionPlanner")

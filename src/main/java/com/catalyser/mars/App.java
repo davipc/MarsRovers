@@ -7,6 +7,12 @@ import com.catalyser.mars.impl.TextFileInputParser;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * This is the main solution class. It reads the input from a file, then kicks the execution of the simulation.
+ * 
+ * @author davi
+ *
+ */
 @Slf4j
 public class App {
 	public static void main(String[] args) throws Exception {

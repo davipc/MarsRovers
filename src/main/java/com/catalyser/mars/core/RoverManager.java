@@ -13,6 +13,13 @@ import com.catalyser.mars.impl.CautiousPositionPlanner;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * The manager handles all the rovers being deployed in Mars.
+ * Once all are deployed, it asks them one by one to execute their commands.
+ *  
+ * @author davip
+ *
+ */
 @Slf4j
 public class RoverManager {
 
