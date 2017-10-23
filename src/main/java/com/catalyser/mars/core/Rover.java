@@ -1,6 +1,10 @@
 package com.catalyser.mars.core;
 
 import java.util.List;
+import java.util.Objects;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.catalyser.mars.domain.Command;
 import com.catalyser.mars.domain.Coordinates;
@@ -9,34 +13,51 @@ import com.catalyser.mars.domain.Grid;
 import com.catalyser.mars.exceptions.BadCoordinatesException;
 import com.catalyser.mars.exceptions.CoordinatesTakenException;
 
-import lombok.Data;
-import lombok.NonNull;
-import lombok.ToString;
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * Each instance represents a rover.
  * They know how to execute their commands, and update their positions on the shared grid by themselves (rather than asking the manager to do it). 
  * @author davi
  *
  */
-@Slf4j
-@Data
-@ToString(exclude="positionPlanner")
 public class Rover {
+
+	private static Logger log = LoggerFactory.getLogger(Rover.class);
+	
 	private final int id;
-	
-	@NonNull
 	private Coordinates coordinates;
-	
-	@NonNull
 	private Direction direction;
-	
-	@NonNull
 	private List<Command> commands;
-	
 	private PositionPlannerStrategy positionPlanner;
 	
+	public Rover(int id, Coordinates coordinates, Direction direction, List<Command> commands) {
+		this.id = id;
+		this.coordinates = coordinates;
+		this.direction = direction;
+		this.commands = commands;
+	}
+	
+	public PositionPlannerStrategy getPositionPlanner() {
+		return positionPlanner;
+	}
+	public void setPositionPlanner(PositionPlannerStrategy positionPlanner) {
+		this.positionPlanner = positionPlanner;
+	}
+	public int getId() {
+		return id;
+	}
+	public Coordinates getCoordinates() {
+		return coordinates;
+	}
+	public Direction getDirection() {
+		return direction;
+	}
+	public void setDirection(Direction newDirection) {
+		this.direction = newDirection;
+	}
+	public List<Command> getCommands() {
+		return commands;
+	}
+
 	/**
 	 * Executes the string of commands sent by NASA
 	 * If there are problems during the execution of the commands, these will be reported back through the return parameter
@@ -65,5 +86,39 @@ public class Rover {
 		}
 		
 		log.debug("Finished executing commands for rover {}", this);
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("Rover(")
+			.append("id=").append(id)
+			.append(", coordinates=").append(coordinates)
+			.append(", direction=").append(direction)
+			.append(", commands=").append(commands)
+			.append(")");
+		
+		return sb.toString();
+	}
+	
+	@Override
+	public boolean equals(Object otherObj) {
+		if (!(otherObj instanceof Rover))
+			return false;
+		
+		Rover otherRover = (Rover) otherObj;
+		
+		return id == otherRover.id && 
+						coordinates.equals(otherRover.coordinates) && 
+						direction.equals(otherRover.direction) && 
+						commands.containsAll(otherRover.commands) &&
+						(positionPlanner == null && positionPlanner == null || 
+							positionPlanner != null && positionPlanner.equals(otherRover.positionPlanner));
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, coordinates, direction, commands, positionPlanner);
 	}
 }

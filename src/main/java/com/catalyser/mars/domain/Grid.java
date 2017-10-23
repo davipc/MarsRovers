@@ -6,22 +6,32 @@ import java.util.Map;
 import com.catalyser.mars.core.Rover;
 import com.catalyser.mars.exceptions.BadCoordinatesException;
 import com.catalyser.mars.exceptions.CoordinatesTakenException;
-
-import lombok.Data;
-import lombok.NonNull;
+import com.catalyser.mars.helper.Checker;
 
 /**
  * Stores the grid dimension and the rovers in the surface.
  * @author davi
  *
  */
-@Data
 public class Grid {
 
 	private final int maxX;
 
 	private final int maxY;
 	
+	public Grid(int maxX, int maxY) {
+		this.maxX = maxX;
+		this.maxY = maxY;
+	}
+	
+	public int getMaxX() {
+		return maxX;
+	}
+
+	public int getMaxY() {
+		return maxY;
+	}
+
 	// we will go with a map rather than a matrix
 	// reason: we assume the grid dimension could be large
 	// pro: small memory footprint for storing the rovers
@@ -35,8 +45,8 @@ public class Grid {
 	 * @throws BadCoordinatesException If the specified coordinates are not valid
 	 * @throws CoordinatesTakenException If there is a rover already at the specified coordinates
 	 */
-	public void addRover(@NonNull Rover rover) throws BadCoordinatesException, CoordinatesTakenException {
-		// Annotation is already checking for null rover
+	public void addRover(Rover rover) throws BadCoordinatesException, CoordinatesTakenException {
+		Checker.checkForNull(rover, "rover");
 		
 		// check rover coordinates
 		if (rover.getCoordinates().getX() < 0 || rover.getCoordinates().getX() > maxX || 
@@ -61,7 +71,9 @@ public class Grid {
 	 * @throws BadCoordinatesException see {@link #addRover(Rover)}
 	 * @throws CoordinatesTakenException see {@link #addRover(Rover)}
 	 */
-	public void updateRoverPosition(@NonNull Rover rover) throws BadCoordinatesException, CoordinatesTakenException {
+	public void updateRoverPosition(Rover rover) throws BadCoordinatesException, CoordinatesTakenException {
+		Checker.checkForNull(rover, "rover");
+		
 		mapTakenCoords.remove(rover.getId());
 		addRover(rover);
 	}

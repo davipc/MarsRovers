@@ -1,5 +1,8 @@
 package com.catalyser.mars.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.catalyser.mars.core.PositionPlannerStrategy;
 import com.catalyser.mars.core.Rover;
 import com.catalyser.mars.domain.Coordinates;
@@ -7,17 +10,16 @@ import com.catalyser.mars.domain.Grid;
 import com.catalyser.mars.exceptions.BadCoordinatesException;
 import com.catalyser.mars.exceptions.CoordinatesTakenException;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * Since the rovers are not running concurrently, 
  * we only really need one instance of this, so we will use a singleton.
  * 
  * @author davi
  */
-@Slf4j
 public class CautiousPositionPlanner implements PositionPlannerStrategy {
 
+	private static Logger log = LoggerFactory.getLogger(CautiousPositionPlanner.class);
+	
 	private static CautiousPositionPlanner instance;
 	
 	public static CautiousPositionPlanner getInstance() {

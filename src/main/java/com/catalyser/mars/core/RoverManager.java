@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.catalyser.mars.domain.Coordinates;
 import com.catalyser.mars.domain.Grid;
 import com.catalyser.mars.domain.Input;
 import com.catalyser.mars.exceptions.BadCoordinatesException;
 import com.catalyser.mars.exceptions.CoordinatesTakenException;
 import com.catalyser.mars.impl.CautiousPositionPlanner;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * The manager handles all the rovers being deployed in Mars.
@@ -20,8 +21,9 @@ import lombok.extern.slf4j.Slf4j;
  * @author davip
  *
  */
-@Slf4j
 public class RoverManager {
+
+	private static Logger log = LoggerFactory.getLogger(RoverManager.class);
 
 	private Input input; 
 

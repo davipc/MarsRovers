@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.catalyser.mars.core.InputParser;
 import com.catalyser.mars.core.Rover;
 import com.catalyser.mars.domain.Command;
 import com.catalyser.mars.domain.Coordinates;
 import com.catalyser.mars.domain.Direction;
 import com.catalyser.mars.domain.Input;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Reads the input from a string. 
@@ -20,9 +21,10 @@ import lombok.extern.slf4j.Slf4j;
  * @author davi
  *
  */
-@Slf4j
 public class StringInputParser implements InputParser<String> {
 
+	private static Logger log = LoggerFactory.getLogger(StringInputParser.class);
+	
 	private int id = 1;
 	
 	/**

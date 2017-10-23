@@ -1,11 +1,12 @@
 package com.catalyser.mars;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.catalyser.mars.core.InputParser;
 import com.catalyser.mars.core.RoverManager;
 import com.catalyser.mars.domain.Input;
 import com.catalyser.mars.impl.TextFileInputParser;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * This is the main solution class. It reads the input from a file, then kicks the execution of the simulation.
@@ -13,8 +14,10 @@ import lombok.extern.slf4j.Slf4j;
  * @author davi
  *
  */
-@Slf4j
 public class App {
+	
+	private static Logger log = LoggerFactory.getLogger(App.class);	
+	
 	public static void main(String[] args) throws Exception {
 		if (args.length == 0) {
 			log.error("This program requires one argument: the path to the file where the input is defined"); 
