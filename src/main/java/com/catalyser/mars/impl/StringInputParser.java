@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import com.catalyser.mars.core.InputParser;
 import com.catalyser.mars.core.Rover;
+import com.catalyser.mars.domain.Command;
 import com.catalyser.mars.domain.Coordinates;
 import com.catalyser.mars.domain.Direction;
 import com.catalyser.mars.domain.Input;
@@ -64,13 +65,15 @@ public class StringInputParser implements InputParser<String> {
 
 		Coordinates roverCoords;
 		String roverDirection;
-		String commands;
+		String commandsStr;
+		List<Command> commands;
 		while (scanner.hasNext()) {
+			// TODO: could use a builder to create the Rover
 			roverCoords = new Coordinates(scanner.nextInt(), scanner.nextInt());
 			roverDirection = scanner.next();
 			scanner.nextLine();
-			commands = scanner.nextLine();
-			
+			commandsStr = scanner.nextLine();
+			commands = Command.parseCommands(commandsStr);
 			rovers.add(new Rover(id++, roverCoords, Direction.valueOf(roverDirection), commands));
 		}
 		scanner.close();

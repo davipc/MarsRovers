@@ -1,5 +1,8 @@
 package com.catalyser.mars.core;
 
+import java.util.List;
+
+import com.catalyser.mars.domain.Command;
 import com.catalyser.mars.domain.Coordinates;
 import com.catalyser.mars.domain.Direction;
 import com.catalyser.mars.domain.Grid;
@@ -24,7 +27,7 @@ public class Rover {
 	private Direction direction;
 	
 	@NonNull
-	private String commands;
+	private List<Command> commands;
 	
 	private PositionPlannerStrategy positionPlanner;
 	
@@ -37,15 +40,16 @@ public class Rover {
 	public void executeCommands(Grid grid) throws BadCoordinatesException, CoordinatesTakenException {
 		log.debug("Executing commands for rover {}", this);
 		
-		for (char command: commands.toCharArray()) {
+		// using basic for loop to avoid having to create a wrapper functional interface for the possible thrown exception on M
+		for (Command command: commands) {
 			switch(command) {
-				case 'L': 
+				case L: 
 					direction = direction.rotateLeft();
 					break;
-				case 'R': 
+				case R: 
 					direction = direction.rotateRight();
 					break;
-				case 'M': 
+				case M: 
 					// find the next position for this rover
 					// if an exception is thrown by the strategy, the remaining commands will not be executed
 					coordinates = positionPlanner.findNextCoordinates(this, grid);

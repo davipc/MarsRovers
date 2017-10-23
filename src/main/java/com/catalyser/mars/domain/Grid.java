@@ -48,7 +48,7 @@ public class Grid {
 		// check there is not another rover at the same position
 		boolean coordinatesTaken = isPositionTaken(rover.getCoordinates());
 		if (coordinatesTaken) {
-			throw new CoordinatesTakenException(String.format("Cannot deploy rover at specified coordinates, it is already taken: %s", rover));
+			throw new CoordinatesTakenException(String.format("Cannot deploy rover at specified coordinates, the position is already taken: %s", rover));
 		}
 		
 		// if we got to this point it's all good, add the rover

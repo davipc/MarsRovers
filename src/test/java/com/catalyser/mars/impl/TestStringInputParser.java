@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import com.catalyser.mars.core.Rover;
+import com.catalyser.mars.domain.Command;
 import com.catalyser.mars.domain.Coordinates;
 import com.catalyser.mars.domain.Direction;
 import com.catalyser.mars.domain.Input;
@@ -87,7 +88,7 @@ public class TestStringInputParser {
     	Input input = parser.parseInput("0 5\n1 2 S\nLMLMLMLMM");
     	assertThat(input).isNotNull();
     	assertThat(input.getMaxCoordinates()).isEqualTo(new Coordinates(0,5));
-    	assertThat(input.getRovers()).containsExactly(new Rover(1, new Coordinates(1, 2), Direction.S, "LMLMLMLMM"));
+    	assertThat(input.getRovers()).containsExactly(new Rover(1, new Coordinates(1, 2), Direction.S, Command.parseCommands("LMLMLMLMM")));
     }
 
     @Test
@@ -95,7 +96,7 @@ public class TestStringInputParser {
     	Input input = parser.parseInput("100 5000\n1 2 S\nLMLMLMLMM");
     	assertThat(input).isNotNull();
     	assertThat(input.getMaxCoordinates()).isEqualTo(new Coordinates(100,5000));
-    	assertThat(input.getRovers()).containsExactly(new Rover(1, new Coordinates(1, 2), Direction.S, "LMLMLMLMM"));
+    	assertThat(input.getRovers()).containsExactly(new Rover(1, new Coordinates(1, 2), Direction.S, Command.parseCommands("LMLMLMLMM")));
     }
 
     @Test
@@ -103,7 +104,7 @@ public class TestStringInputParser {
     	Input input = parser.parseInput("5 9\n101 982 S\nLMLMLMLMM");
     	assertThat(input).isNotNull();
     	assertThat(input.getMaxCoordinates()).isEqualTo(new Coordinates(5,9));
-    	assertThat(input.getRovers()).containsExactly(new Rover(1, new Coordinates(101, 982), Direction.S, "LMLMLMLMM"));
+    	assertThat(input.getRovers()).containsExactly(new Rover(1, new Coordinates(101, 982), Direction.S, Command.parseCommands("LMLMLMLMM")));
     }
     
     @Test
@@ -111,7 +112,7 @@ public class TestStringInputParser {
     	Input input = parser.parseInput("5 6\n1 2 N\nRMLMLMLMM");
     	assertThat(input).isNotNull();
     	assertThat(input.getMaxCoordinates()).isEqualTo(new Coordinates(5,6));
-    	assertThat(input.getRovers()).containsExactly(new Rover(1, new Coordinates(1, 2), Direction.N, "RMLMLMLMM"));
+    	assertThat(input.getRovers()).containsExactly(new Rover(1, new Coordinates(1, 2), Direction.N, Command.parseCommands("RMLMLMLMM")));
     }
 
     // rovers with coordinates higher than the max coordinates will not be validated by the parser
@@ -120,7 +121,7 @@ public class TestStringInputParser {
     	Input input = parser.parseInput("6 7\n8 9 E\nRMLMLMLMM");
     	assertThat(input).isNotNull();
     	assertThat(input.getMaxCoordinates()).isEqualTo(new Coordinates(6,7));
-    	assertThat(input.getRovers()).containsExactly(new Rover(1, new Coordinates(8, 9), Direction.E, "RMLMLMLMM"));
+    	assertThat(input.getRovers()).containsExactly(new Rover(1, new Coordinates(8, 9), Direction.E, Command.parseCommands("RMLMLMLMM")));
     }
 
     @Test
@@ -129,8 +130,8 @@ public class TestStringInputParser {
     	assertThat(input).isNotNull();
     	assertThat(input.getMaxCoordinates()).isEqualTo(new Coordinates(5,6));
     	assertThat(input.getRovers()).containsExactly(
-    			new Rover(1, new Coordinates(1, 2), Direction.N, "RMLMLMLMM"), 
-    			new Rover(2, new Coordinates(6, 1), Direction.W, "RLMRLMRLMLMRLRMLMRLMR"));
+    			new Rover(1, new Coordinates(1, 2), Direction.N, Command.parseCommands("RMLMLMLMM")), 
+    			new Rover(2, new Coordinates(6, 1), Direction.W, Command.parseCommands("RLMRLMRLMLMRLRMLMRLMR")));
     }
-    
+ 
 }

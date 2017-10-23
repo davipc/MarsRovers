@@ -49,14 +49,14 @@ public class CautiousPositionPlanner implements PositionPlannerStrategy {
 
 		// check if the new position is valid
 		if (newX < 0 || newX > grid.getMaxX() || newY < 0 || newY >= grid.getMaxY()) {
-			throw new BadCoordinatesException(String.format("Can't move %s from %s", rover.getDirection(), rover.getCoordinates()));
+			throw new BadCoordinatesException(String.format("Can't move %s from %s", rover.getDirection().getDescription(), rover.getCoordinates()));
 		}
 		
 		Coordinates newCoordinates = new Coordinates(newX, newY); 
 
 		// finally check if the new position isn't already occupied
 		if (grid.isPositionTaken(newCoordinates)) {
-			throw new CoordinatesTakenException(String.format("The new coordinates for rover %s at command %s were already taken: %s", rover, rover.getDirection(), newCoordinates ));
+			throw new CoordinatesTakenException(String.format("The new coordinates for rover %s moving %s were already taken: %s", rover, rover.getDirection().getDescription(), newCoordinates ));
 		}
 		
 		log.debug(String.format("Finished calculating next position for rover %s: found %s", rover, newCoordinates));
