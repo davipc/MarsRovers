@@ -21,7 +21,7 @@ import com.catalyser.mars.exceptions.CoordinatesTakenException;
  */
 public class Rover {
 
-	private static Logger log = LoggerFactory.getLogger(Rover.class);
+	private static final Logger log = LoggerFactory.getLogger(Rover.class);
 	
 	private final int id;
 	private Coordinates coordinates;

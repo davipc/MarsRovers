@@ -19,7 +19,7 @@ import com.catalyser.mars.domain.Input;
  */
 public class TextFileInputParser implements InputParser<String> {
 
-	private static Logger log = LoggerFactory.getLogger(TextFileInputParser.class);	
+	private static final Logger log = LoggerFactory.getLogger(TextFileInputParser.class);	
 	
 	public Input parseInput(String filePath) throws IOException {
 		log.info(String.format("Parsing input file %s", filePath));

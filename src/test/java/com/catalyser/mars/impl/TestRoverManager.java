@@ -17,35 +17,15 @@ public class TestRoverManager {
 
 	private RoverManager manager = new RoverManager();
 	
-	private Input inputSample = Input.builder().maxCoordinates(new Coordinates(5, 5)).rovers(
-			Arrays.asList(
-					new Rover(1, new Coordinates(1, 2), Direction.N, Command.parseCommands("LMLMLMLMM")),
-					new Rover(2, new Coordinates(3, 3), Direction.E, Command.parseCommands("MMRMMRMRRM"))
-			)).build();
-
-	private Input input2RoversSameCoord = Input.builder().maxCoordinates(new Coordinates(5, 5)).rovers(
-			Arrays.asList(
-					new Rover(1, new Coordinates(1, 2), Direction.N, Command.parseCommands("LMLMLMLMM")),
-					new Rover(2, new Coordinates(1, 2), Direction.E, Command.parseCommands("MMRMMRMRRM"))
-			)).build();
-
-	// first rover will try to get past the border at 1 5
-	private Input inputRoverMovingOut = Input.builder().maxCoordinates(new Coordinates(5, 5)).rovers(
-			Arrays.asList(
-					new Rover(1, new Coordinates(1, 5), Direction.N, Command.parseCommands("RMMMMM")),
-					new Rover(2, new Coordinates(1, 2), Direction.W, Command.parseCommands("LM"))
-			)).build();
-
-	// second rover will get a position that would make it collide with the first
-	private Input inputRoverColliding = Input.builder().maxCoordinates(new Coordinates(5, 5)).rovers(
-			Arrays.asList(
-					new Rover(1, new Coordinates(1, 2), Direction.S, Command.parseCommands("M")),
-					new Rover(2, new Coordinates(2, 1), Direction.W, Command.parseCommands("M"))
-			)).build();
-	
-	
 	@Test
 	public void testSuccessfulDeployment() {
+		Input inputSample = Input.builder().maxCoordinates(new Coordinates(5, 5)).rovers(
+				Arrays.asList(
+						new Rover(1, new Coordinates(1, 2), Direction.N, Command.parseCommands("LMLMLMLMM")),
+						new Rover(2, new Coordinates(3, 3), Direction.E, Command.parseCommands("MMRMMRMRRM"))
+				)).build();
+
+
 		manager.setInput(inputSample);
 		
 		manager.deployRovers();
@@ -55,6 +35,12 @@ public class TestRoverManager {
 	// only the first rover sent to a coordinate is deployed 
 	@Test
 	public void testError2RoversSameCoordinates() {
+		Input input2RoversSameCoord = Input.builder().maxCoordinates(new Coordinates(5, 5)).rovers(
+				Arrays.asList(
+						new Rover(1, new Coordinates(1, 2), Direction.N, Command.parseCommands("LMLMLMLMM")),
+						new Rover(2, new Coordinates(1, 2), Direction.E, Command.parseCommands("MMRMMRMRRM"))
+				)).build();
+
 		manager.setInput(input2RoversSameCoord);
 		
 		manager.deployRovers();
@@ -64,6 +50,13 @@ public class TestRoverManager {
 	
 	@Test
 	public void testErrorRoverMovingOutOfSurface() {
+		// first rover will try to get past the border at 1 5
+		Input inputRoverMovingOut = Input.builder().maxCoordinates(new Coordinates(5, 5)).rovers(
+				Arrays.asList(
+						new Rover(1, new Coordinates(1, 5), Direction.N, Command.parseCommands("RMMMMM")),
+						new Rover(2, new Coordinates(1, 2), Direction.W, Command.parseCommands("LM"))
+				)).build();
+
 		manager.setInput(inputRoverMovingOut);
 		
 		manager.deployRovers();
@@ -74,6 +67,13 @@ public class TestRoverManager {
 
 	@Test
 	public void testErrorRoverColliding() {
+		// second rover will get a position that would make it collide with the first
+		Input inputRoverColliding = Input.builder().maxCoordinates(new Coordinates(5, 5)).rovers(
+				Arrays.asList(
+						new Rover(1, new Coordinates(1, 2), Direction.S, Command.parseCommands("M")),
+						new Rover(2, new Coordinates(2, 1), Direction.W, Command.parseCommands("M"))
+				)).build();
+		
 		manager.setInput(inputRoverColliding);
 		
 		manager.deployRovers();

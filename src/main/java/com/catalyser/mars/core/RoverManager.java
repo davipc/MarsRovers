@@ -23,7 +23,7 @@ import com.catalyser.mars.impl.CautiousPositionPlanner;
  */
 public class RoverManager {
 
-	private static Logger log = LoggerFactory.getLogger(RoverManager.class);
+	private static final Logger log = LoggerFactory.getLogger(RoverManager.class);
 
 	private Input input; 
 

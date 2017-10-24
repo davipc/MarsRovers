@@ -23,7 +23,7 @@ import com.catalyser.mars.domain.Input;
  */
 public class StringInputParser implements InputParser<String> {
 
-	private static Logger log = LoggerFactory.getLogger(StringInputParser.class);
+	private static final Logger log = LoggerFactory.getLogger(StringInputParser.class);
 	
 	private int id = 1;
 	

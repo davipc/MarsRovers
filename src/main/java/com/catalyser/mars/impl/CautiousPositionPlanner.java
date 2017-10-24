@@ -18,7 +18,7 @@ import com.catalyser.mars.exceptions.CoordinatesTakenException;
  */
 public class CautiousPositionPlanner implements PositionPlannerStrategy {
 
-	private static Logger log = LoggerFactory.getLogger(CautiousPositionPlanner.class);
+	private static final Logger log = LoggerFactory.getLogger(CautiousPositionPlanner.class);
 	
 	private static CautiousPositionPlanner instance;
 	
